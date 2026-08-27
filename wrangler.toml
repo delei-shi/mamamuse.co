@@ -1,0 +1,11 @@
+# Cloudflare Workers static-assets deploy for mamamuse.co
+#
+# The site is entirely static, so there is no Worker script and no `main`
+# entrypoint — Cloudflare serves ./site directly from its asset store.
+# `npx wrangler deploy` reads this file from the repo root.
+
+name = "mamamuse-co"
+compatibility_date = "2026-08-27"
+
+[assets]
+directory = "./site"
