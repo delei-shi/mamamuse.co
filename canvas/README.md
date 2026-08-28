@@ -10,6 +10,11 @@ Not part of the deployed site — `wrangler.toml` serves `../site` only.
   `border-radius`, `fit` became `object-fit`, and the arch masks stayed
   bound to `{{ heroMask }}` / `{{ portraitMask }}` so the arches tweak still
   works. Inline styles are also what the canvas properties panel edits.
+
+  They lay out in normal flow (`width`/`height: 100%`, `display: block`),
+  never `position: absolute`. Not every container is positioned — the WeChat
+  QR's is not, and it carries padding — so absolute positioning escapes to a
+  distant ancestor and renders the image enormous.
 - the `window.__resources` vendoring shim was dropped; the canvas supplies
   its own runtime.
 - `./assets/NAME` references became bare `NAME`, matching the image keys.
