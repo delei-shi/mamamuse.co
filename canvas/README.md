@@ -20,8 +20,13 @@ Not part of the deployed site — `wrangler.toml` serves `../site` only.
 - `./assets/NAME` references became bare `NAME`, matching the image keys.
 
 The images are WebP copies of `../site/assets`, each under 70 KB, because the
-canvas embeds every image in the published document (`route-map.png` alone
-was 1.19 MB).
+canvas embeds every image in the published document (`hero-group7.png` alone
+is 1.93 MB, and compresses to 60 KB at quality 86). Only assets the page
+actually references are carried here, so unreferenced ones in `../site/assets`
+are absent by design.
+
+Note the hero is a plain `<img>` in the export itself, not an `image-slot`, so
+ten elements get converted rather than twelve.
 
 Edits made on the canvas do NOT flow back here automatically. Port them into
 `../site/index.html` by hand, restoring the real `<image-slot>` elements and
