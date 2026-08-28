@@ -27,40 +27,52 @@ window.__resources = {
   a { color: #2A2624; text-decoration: none; }
   a:hover { color: #C98A90; }
   ::selection { background: #E8B4B8; color: #2A2624; }
+  #nav-links { display: flex; }
+  #mobile-bar { display: none; }
+  @media (max-width: 860px) {
+    #nav-links { display: none; }
+    #mobile-bar { display: flex; }
+    #site-body { padding-bottom: 78px; }
+  }
+  #hero-photo-col > div:last-child { height: 300px; }
+  @media (min-width: 861px) {
+    #hero-photo-col { order: 2; }
+    #hero-text-col { order: 1; }
+    #hero-photo-col > div:last-child { height: clamp(360px, 52vw, 560px); }
+  }
+  @keyframes floatUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes softPulse { 0%, 100% { transform: translateY(0); opacity: 0.9; } 50% { transform: translateY(7px); opacity: 0.45; } }
 </style>
 </helmet>
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#E8B4B8"></rect><text x="50" y="59" font-family="Georgia, serif" font-size="30" fill="#2A2624" text-anchor="middle">MM</text></svg></template>
-<div style="font-family: Helvetica, 'PingFang SC', 'Hiragino Sans GB', sans-serif; background: #FAF7F3; min-height: 100vh">
+<div id="site-body" style="font-family: Helvetica, 'PingFang SC', 'Hiragino Sans GB', sans-serif; background: #FAF7F3; min-height: 100vh">
   <sc-if value="{{ showAnnounce }}" hint-placeholder-val="{{ true }}">
-    <div data-screen-label="Announcement" style="background: #2A2624; color: #F5EDE8; text-align: center; padding: 10px 20px; font-size: 13px; letter-spacing: 0.12em">首次课程免费 · FIRST CLASS FREE · 每周五 11:00 AM–12:00 PM</div>
+    <div data-screen-label="Announcement" style="background: #2A2624; color: #F5EDE8; text-align: center; padding: 8px 16px; font-size: clamp(11px, 2.6vw, 12px); letter-spacing: 0.16em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">首次课程免费 · FIRST CLASS FREE</div>
   </sc-if>
-  <header data-screen-label="Nav" style="position: sticky; top: 0; z-index: 60; background: rgba(250, 247, 243, 0.94); backdrop-filter: blur(12px); border-bottom: 1px solid #EFE4DA">
-    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px 28px; padding: 14px clamp(20px, 5vw, 48px); max-width: 1200px; margin: 0 auto; box-sizing: border-box">
-    <a href="#top" style="font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; font-size: 24px; letter-spacing: 0.22em; font-weight: 500">MAMA MUSE</a>
-    <nav style="display: flex; flex-wrap: wrap; row-gap: 8px; gap: 20px; font-size: 13px; letter-spacing: 0.06em; align-items: center; white-space: nowrap">
-      <a href="#about" style="color: #6E645C; white-space: nowrap" style-hover="color: #2A2624">关于老师</a>
-      <a href="#classes" style="color: #6E645C; white-space: nowrap" style-hover="color: #2A2624">课堂</a>
-      <a href="#testimonials" style="color: #6E645C; white-space: nowrap" style-hover="color: #2A2624">学员评价</a>
-      <a href="#pricing" style="color: #6E645C; white-space: nowrap" style-hover="color: #2A2624">价格</a>
-      <a href="#faq" style="color: #6E645C; white-space: nowrap" style-hover="color: #2A2624">常见问题</a>
-      <a href="#directions" style="color: #6E645C; white-space: nowrap" style-hover="color: #2A2624">路线</a>
-      <a href="#contact" style="border: 1px solid #2A2624; padding: 10px 20px; border-radius: 999px; letter-spacing: 0.1em; white-space: nowrap" style-hover="background: #2A2624; color: #F5EDE8">预约试课</a>
-    </nav>
-      <details style="position: relative; flex-shrink: 0">
-        <summary style="list-style: none; border: 1px solid #2A2624; border-radius: 999px; padding: 9px 18px; font-size: 12px; letter-spacing: 0.1em; cursor: pointer; white-space: nowrap; user-select: none" style-hover="background: #2A2624; color: #F5EDE8">微信 QR</summary>
-        <div style="position: absolute; top: 52px; right: 0; width: 212px; background: #FFFFFF; border: 1px solid #E4D8CE; border-radius: 20px; padding: 14px; box-sizing: border-box; box-shadow: 0 18px 48px rgba(42, 38, 36, 0.16); z-index: 80">
-          <div style="position: relative; width: 100%; height: 184px">
-            <image-slot id="wechat-qr-nav" src="./assets/photo-wechat-qr-nav.webp" shape="rounded" radius="12" fit="contain" placeholder="微信二维码 WeChat QR"></image-slot>
-          </div>
-          <div style="font-size: 11px; letter-spacing: 0.16em; color: #A08D84; text-align: center; margin-top: 10px">扫码加微信 · 备注「姓名 + 试听」</div>
-        </div>
-      </details>
+  <header data-screen-label="Nav" style="position: sticky; top: 0; z-index: 60; background: rgba(250, 247, 243, 0.94); backdrop-filter: blur(14px); border-bottom: 1px solid #EFE4DA">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 13px clamp(18px, 5vw, 48px); max-width: 1200px; margin: 0 auto; box-sizing: border-box">
+      <a href="#top" style="font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; font-size: clamp(19px, 4.4vw, 23px); letter-spacing: 0.2em; font-weight: 500; white-space: nowrap">MAMA MUSE<span style="display: block; font-family: Helvetica, 'PingFang SC', sans-serif; font-size: 10px; letter-spacing: 0.24em; color: #A08D84; margin-top: 2px">爵士舞蹈课</span></a>
+      <nav id="nav-links" style="flex-wrap: wrap; row-gap: 8px; gap: 22px; font-size: 13px; letter-spacing: 0.06em; align-items: center; white-space: nowrap">
+        <a href="#about" style="color: #6E645C" style-hover="color: #2A2624">关于老师</a>
+        <a href="#classes" style="color: #6E645C" style-hover="color: #2A2624">课堂</a>
+        <a href="#testimonials" style="color: #6E645C" style-hover="color: #2A2624">学员评价</a>
+        <a href="#pricing" style="color: #6E645C" style-hover="color: #2A2624">价格</a>
+        <a href="#faq" style="color: #6E645C" style-hover="color: #2A2624">常见问题</a>
+        <a href="#directions" style="color: #6E645C" style-hover="color: #2A2624">路线</a>
+      </nav>
+      <a href="#contact" style="background: #2A2624; color: #F5EDE8; padding: 10px 20px; border-radius: 999px; font-size: 12px; letter-spacing: 0.1em; white-space: nowrap; flex-shrink: 0" style-hover="background: {{ accent }}; color: #2A2624">免费试课</a>
     </div>
   </header>
 
-  <section id="top" data-screen-label="Hero" style="max-width: 1200px; margin: 0 auto; padding: clamp(32px, 6vw, 56px) clamp(20px, 5vw, 48px) clamp(56px, 8vw, 96px); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(32px, 5vw, 72px); align-items: center; box-sizing: border-box">
-    <div>
-      <div style="display: flex; align-items: center; gap: 14px; margin: 0 0 26px; flex-wrap: wrap; font-size: 12px; letter-spacing: 0.32em; color: #A08D84">
+  <section id="top" data-screen-label="Hero" style="max-width: 1200px; margin: 0 auto; padding: clamp(32px, 6vw, 56px) clamp(20px, 5vw, 48px) clamp(56px, 8vw, 96px); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(28px, 5vw, 72px); align-items: center; box-sizing: border-box">
+    <div id="hero-photo-col" style="position: relative">
+      <div style="position: absolute; inset: -18px -18px auto auto; width: 120px; height: 120px; border-radius: 50%; background: {{ accent }}; opacity: 0.35"></div>
+      <div style="position: relative; width: 100%; height: clamp(360px, 52vw, 560px)">
+        <img src="./assets/hero-group7.png" alt="Mama Muse 课堂" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 200px 200px 20px 20px">
+      </div>
+    </div>
+    <div id="hero-text-col">
+      <div style="display: flex; align-items: center; gap: 14px; margin: 0 0 22px; flex-wrap: wrap; font-size: 12px; letter-spacing: 0.32em; color: #A08D84">
         <span style="color: #2A2624">健康</span>
         <span style="width: 4px; height: 4px; border-radius: 50%; background: {{ accent }}"></span>
         <span style="color: #2A2624">解压</span>
@@ -69,21 +81,16 @@ window.__resources = {
         <span style="width: 4px; height: 4px; border-radius: 50%; background: {{ accent }}"></span>
         <span style="color: #2A2624">发光</span>
       </div>
-      <p style="margin: 0 0 20px; font-size: 11px; letter-spacing: 0.3em; color: #B5A398">PALO ALTO · ADULT JAZZ DANCE</p>
-      <h1 style="font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; font-size: clamp(40px, 5.2vw, 64px); line-height: 1.14; font-weight: 500; margin: 0 0 14px; text-wrap: pretty">跳舞，<br>送自己最好的礼物</h1>
-      <p style="font-family: 'Cormorant Garamond', serif; font-size: 24px; font-style: italic; color: #A08D84; margin: 0 0 28px">Dance, the best gift to yourself.</p>
-      <p style="font-size: 15px; line-height: 1.9; color: #6E645C; max-width: 42ch; margin: 0 0 40px; text-wrap: pretty">音乐一响，你就只做那个自信，发光，爱跳舞的自己。刻意练习，让零基础也能轻松拿捏。<span style="display: block; margin-top: 12px; color: #8A7C72">The music starts, and you get to be her — confident, glowing, alive. We break every move down step by step — so even first-timers walk out feeling like dancers.</span></p>
+      <p style="margin: 0 0 20px; font-size: 12px; letter-spacing: 0.22em; color: #8A7C72">爵士舞蹈课 · JAZZ DANCE CLASS · PALO ALTO</p>
+      <h1 style="font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; font-size: clamp(40px, 5.2vw, 64px); line-height: 1.14; font-weight: 500; margin: 0 0 14px; text-wrap: pretty"><span style="display: inline-block; position: relative; font-size: 1.18em">看见自己<span style="position: absolute; left: -2px; right: -2px; bottom: 0.14em; height: 0.22em; background: {{ accent }}; opacity: 0.45; border-radius: 3px; z-index: -1"></span></span><span style="font-family: 'Cormorant Garamond', serif; font-style: italic; color: {{ accent }}; margin-left: 6px">，</span><br><span style="font-size: 0.74em; letter-spacing: 0.04em; color: #6E645C">才是最好的</span><span style="font-size: 0.92em; font-style: italic; font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; margin-left: 4px">礼物</span></h1>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 3.4vw, 24px); font-style: italic; color: #A08D84; margin: 0 0 26px">See yourself — it's the best gift.</p>
+      <p style="font-size: 15px; line-height: 1.9; color: #6E645C; max-width: 40ch; margin: 0 0 36px; text-wrap: pretty">音乐一响，你就只做那个自信、发光、爱跳舞的自己。刻意练习，让零基础也能轻松拿捏。<span style="display: block; margin-top: 12px; color: #8A7C72">The music starts, and you get to be her — confident, glowing, alive. We break every move down step by step — so even first-timers walk out feeling like dancers.</span></p>
       <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap">
-        <a href="#contact" style="background: #2A2624; color: #F5EDE8; padding: 15px 34px; border-radius: 999px; font-size: 13px; letter-spacing: 0.12em" style-hover="background: {{ accent }}; color: #2A2624">预约免费试课 · BOOK A TRIAL</a>
-        <a href="mailto:d@mamamuse.co" style="font-size: 13px; letter-spacing: 0.08em; border-bottom: 1px solid #C9BBB2; padding-bottom: 3px; color: #6E645C">d@mamamuse.co</a>
+        <a href="#contact" class="scp1" style="background: rgb(42, 38, 36); color: rgb(245, 237, 232); padding: 15px 34px; border-radius: 999px; font-size: 13px; letter-spacing: 0.12em;">预约免费试课 · BOOK A TRIAL</a>
+        <a href="mailto:d@mamamuse.co" style="font-size: 13px; letter-spacing: 0.08em; border-bottom: 1px solid rgb(201, 187, 178); padding-bottom: 3px; color: rgb(110, 100, 92);">d@mamamuse.co<br>Wechat: shidelei002</a>
       </div>
-      <p style="margin: 44px 0 0; font-size: 13px; letter-spacing: 0.14em; color: #A08D84">每周五 FRIDAYS · 11:00 AM–12:00 PM · CUBBERLEY L6</p>
+      <p style="margin: 40px 0 0; font-size: 13px; letter-spacing: 0.14em; color: #A08D84">每周五中午 FRIDAYS · CUBBERLEY L6</p>
     </div>
-    <div style="position: relative">
-      <div style="position: absolute; inset: -18px -18px auto auto; width: 120px; height: 120px; border-radius: 50%; background: {{ accent }}; opacity: 0.35"></div>
-      <div style="position: relative; width: 100%; height: clamp(360px, 52vw, 560px)">
-        <image-slot id="hero-photo" src="./assets/photo-hero-photo.webp" mask="{{ heroMask }}" placeholder="老师/课堂照片 hero photo"></image-slot>
-      </div>
     </div>
   </section>
 
@@ -132,18 +139,18 @@ window.__resources = {
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 28px; align-items: stretch">
       <div style="background: #F1E7DF; border-radius: 24px; padding: 36px 32px">
         <div style="font-family: 'Cormorant Garamond', serif; font-size: 40px; line-height: 0.5; color: {{ accent }}">“</div>
-        <p style="font-size: 14px; line-height: 2; color: #4C443E; margin: 18px 0 20px; text-wrap: pretty">今天跳舞的时候，老师让我们好好欣赏镜子里的自己，那一刻我像被轻轻点了一下。希望姐妹们都能被「看到」，也别忘了多看看自己。</p>
-        <div style="font-size: 11px; letter-spacing: 0.18em; color: #A08D84">— 学员 K.</div>
+        <p style="font-size: 15px; line-height: 1.95; color: #4C443E; margin: 18px 0 20px; text-wrap: pretty">今天跳舞的时候，老师让我们好好欣赏镜子里的自己，那一刻我被点了一下。希望姐妹们都能被「看到」，也别忘了多看看自己。</p>
+        <div style="font-size: 12px; letter-spacing: 0.12em; color: #8A7C72">一娃创业妈妈</div>
       </div>
       <div style="background: #F1E7DF; border-radius: 24px; padding: 36px 32px">
         <div style="font-family: 'Cormorant Garamond', serif; font-size: 40px; line-height: 0.5; color: {{ accent }}">“</div>
-        <p style="font-size: 14px; line-height: 2; color: #4C443E; margin: 18px 0 20px; text-wrap: pretty">I hadn't danced since college, and by week one I already felt at home. The sweat, the music, the warmth of this room — I'm hooked.</p>
-        <div style="font-size: 11px; letter-spacing: 0.18em; color: #A08D84">— STUDENT, PALO ALTO</div>
+        <p style="font-size: 15px; line-height: 1.95; color: #4C443E; margin: 18px 0 20px; text-wrap: pretty">I hadn't danced since college, and by week one I already felt at home. The sweat, the music, the warmth of this room — I'm hooked.</p>
+        <div style="font-size: 12px; letter-spacing: 0.12em; color: #8A7C72">Mom of 1 little cutie</div>
       </div>
       <div style="background: #F1E7DF; border-radius: 24px; padding: 36px 32px">
         <div style="font-family: 'Cormorant Garamond', serif; font-size: 40px; line-height: 0.5; color: {{ accent }}">“</div>
-        <p style="font-size: 14px; line-height: 2; color: #4C443E; margin: 18px 0 20px; text-wrap: pretty">每周一小时的快乐出汗，让我重新看见那个自信、漂亮的自己。这也成了我一周里最期待的 Me Time。</p>
-        <div style="font-size: 11px; letter-spacing: 0.18em; color: #A08D84">— 学员 Y.</div>
+        <p style="font-size: 15px; line-height: 1.95; color: #4C443E; margin: 18px 0 20px; text-wrap: pretty">每周一小时的快乐出汗，是我一周里最期待的 Me Time。</p>
+        <div style="font-size: 12px; letter-spacing: 0.12em; color: #8A7C72">两个男娃的妈妈</div>
       </div>
     </div>
   </section>
@@ -184,30 +191,30 @@ window.__resources = {
         </div>
       </div>
       <div style="display: flex; justify-content: center; gap: 56px; margin-top: 64px; padding-top: 40px; border-top: 1px solid #4C443E; flex-wrap: wrap; text-align: center">
-        <div><div style="font-size: 11px; letter-spacing: 0.24em; color: {{ accent }}; margin-bottom: 8px">时间 SCHEDULE</div><div style="font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; font-size: 20px">每周五 11:00 AM–12:00 PM</div></div>
+        <div><div style="font-size: 11px; letter-spacing: 0.24em; color: {{ accent }}; margin-bottom: 8px">时间 SCHEDULE</div><div style="font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; font-size: 20px">每周五中午 · Friday midday</div></div>
         <div><div style="font-size: 11px; letter-spacing: 0.24em; color: {{ accent }}; margin-bottom: 8px">地点 LOCATION</div><div style="font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; font-size: 20px">Cubberley Community Center, L6</div><div style="font-size: 12px; color: #B5A99F; margin-top: 4px">4000 Middlefield Rd, Palo Alto, CA</div></div>
         <div><div style="font-size: 11px; letter-spacing: 0.24em; color: {{ accent }}; margin-bottom: 8px">付款 PAYMENT</div><div style="font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; font-size: 20px">Zelle · Venmo · 现金</div></div>
       </div>
     </div>
   </section>
 
-  <section id="contact" data-screen-label="Contact" style="max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 96px) clamp(20px, 5vw, 48px); box-sizing: border-box">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(32px, 5vw, 72px); align-items: center">
+  <section id="contact" data-screen-label="Contact" style="background: #F1E7DF">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 96px) clamp(20px, 5vw, 48px); box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: clamp(34px, 5vw, 72px); align-items: center">
       <div>
-        <p style="margin: 0 0 18px; font-size: 12px; letter-spacing: 0.32em; color: #A08D84">CONTACT</p>
-        <h2 style="font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; font-size: clamp(34px, 4.6vw, 48px); font-weight: 500; margin: 0 0 20px; text-wrap: pretty">联系老师，预约试课</h2>
-        <p style="font-size: 15px; line-height: 2; color: #6E645C; max-width: 46ch; margin: 0 0 36px; text-wrap: pretty">扫码或添加微信，备注「姓名 + 试听」，老师会尽快回复为你安排 —— 第一节课完全免费，来了再决定。Scan the code or add us on WeChat and we'll set up your free first class — no commitment, just come dance.</p>
-        <div style="display: flex; flex-direction: column; gap: 18px; font-size: 14px">
-          <div style="display: flex; gap: 16px; align-items: baseline"><span style="font-size: 11px; letter-spacing: 0.2em; color: #A08D84; min-width: 88px">WECHAT</span><span style="font-weight: 600; letter-spacing: 0.04em">shidelei002</span></div>
-          <div style="display: flex; gap: 16px; align-items: baseline"><span style="font-size: 11px; letter-spacing: 0.2em; color: #A08D84; min-width: 88px">EMAIL</span><a href="mailto:d@mamamuse.co" style="font-weight: 600; border-bottom: 1px solid #C9BBB2; padding-bottom: 2px">d@mamamuse.co</a></div>
-          <div style="display: flex; gap: 16px; align-items: baseline"><span style="font-size: 11px; letter-spacing: 0.2em; color: #A08D84; min-width: 88px">小红书</span><a href="https://xhslink.cn/m/8BSbbi5OCMP" target="_blank" rel="noopener" style="font-weight: 600; border-bottom: 1px solid #C9BBB2; padding-bottom: 2px">Mama Muse 主页 →</a></div>
+        <p style="margin: 0 0 16px; font-size: 12px; letter-spacing: 0.32em; color: #A08D84">CONTACT</p>
+        <h2 style="font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; font-size: clamp(32px, 4.6vw, 48px); font-weight: 500; margin: 0 0 18px; text-wrap: pretty">首次课程免费</h2>
+        <p style="font-size: 15px; line-height: 1.95; color: #5C534C; max-width: 40ch; margin: 0 0 30px; text-wrap: pretty">扫右边的码加微信，或发邮件d@mamamuse.co 备注「姓名 + 舞蹈运动习惯/经历，老师会尽快回复为安排试课。</p>
+        <a href="mailto:d@mamamuse.co?subject=%E9%A2%84%E7%BA%A6%E8%AF%95%E8%AF%BE" style="display: inline-block; background: #2A2624; color: #F5EDE8; padding: 15px 30px; border-radius: 999px; font-size: 13px; letter-spacing: 0.1em; font-weight: 600" style-hover="background: {{ accent }}; color: #2A2624">发邮件预约 · d@mamamuse.co</a>
+        <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px; margin-top: 30px">
+          <div style="display: flex; gap: 16px; align-items: baseline"><span style="font-size: 11px; letter-spacing: 0.2em; color: #A08D84; min-width: 74px">WECHAT</span><span style="font-weight: 600; letter-spacing: 0.04em">shidelei002</span></div>
+          <div style="display: flex; gap: 16px; align-items: baseline"><span style="font-size: 11px; letter-spacing: 0.2em; color: #A08D84; min-width: 74px">小红书</span><a href="https://xhslink.cn/m/8BSbbi5OCMP" target="_blank" rel="noopener" style="font-weight: 600; border-bottom: 1px solid #C9BBB2; padding-bottom: 2px">Mama Muse 主页 →</a></div>
         </div>
       </div>
-      <div style="text-align: center; display: flex; flex-direction: column; gap: 14px; align-items: center">
-        <div style="width: min(240px, 72vw); height: min(240px, 72vw); background: #FFFFFF; border: 1px solid #E4D8CE; border-radius: 24px; padding: 18px; box-sizing: border-box">
-          <image-slot id="wechat-qr" src="./assets/photo-wechat-qr.webp" shape="rounded" radius="10" fit="contain" placeholder="微信二维码 WeChat QR" style="width: 100%; height: 100%"></image-slot>
+      <div style="display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center">
+        <div style="width: min(280px, 78vw); height: min(280px, 78vw); background: #FFFFFF; border-radius: 26px; padding: 18px; box-sizing: border-box; box-shadow: 0 20px 50px rgba(42, 38, 36, 0.12)">
+          <image-slot id="wechat-qr" src="./assets/photo-wechat-qr.webp" shape="rounded" radius="12" fit="contain" placeholder="微信二维码 WeChat QR" style="width: 100%; height: 100%"></image-slot>
         </div>
-        <div style="font-size: 11px; letter-spacing: 0.2em; color: #A08D84">微信二维码 · WECHAT QR</div>
+        <div style="font-size: 12px; letter-spacing: 0.18em; color: #8A7C72">扫码加微信 · 备注「姓名 + 试听」</div>
       </div>
     </div>
   </section>
@@ -219,7 +226,7 @@ window.__resources = {
       <div style="display: flex; flex-direction: column; gap: 0">
         <details style="border-top: 1px solid #C9BBB2; padding: 22px 4px">
           <summary style="cursor: pointer; font-size: 15px; font-weight: 600; list-style: none">零基础可以参加吗？ Can complete beginners join?</summary>
-          <p style="font-size: 14px; line-height: 2; color: #6E645C; margin: 14px 0 0">完全可以，我们大部分学员都是从零开始的。每个动作都会拆解到位，用「刻意练习」的方法反复带练，节奏温和又不失活力，一节课下来你会发现身体比想象中听话。Absolutely — most of our dancers started from zero. Every move is broken down step by step and drilled with deliberate practice, so beginners build real technique without feeling rushed.</p>
+          <p style="font-size: 14px; line-height: 2; color: #6E645C; margin: 14px 0 0">完全可以，绝大部分学员都是从零开始的，且都反映都跳的很开心。每个动作都会拆解到位，用「刻意练习」的方法反复带练，节奏温和又不失活力，一节课下来你会发现，身体比想象中“听话”。Absolutely — most of our dancers started from zero. Every move is broken down step by step and drilled with deliberate practice, so beginners build real technique without feeling rushed.</p>
         </details>
         <details style="border-top: 1px solid #C9BBB2; padding: 22px 4px">
           <summary style="cursor: pointer; font-size: 15px; font-weight: 600; list-style: none">需要穿什么、带什么？ What should I wear and bring?</summary>
@@ -227,7 +234,7 @@ window.__resources = {
         </details>
         <details style="border-top: 1px solid #C9BBB2; padding: 22px 4px">
           <summary style="cursor: pointer; font-size: 15px; font-weight: 600; list-style: none">如何预约试课？ How do I book a trial class?</summary>
-          <p style="font-size: 14px; line-height: 2; color: #6E645C; margin: 14px 0 0">添加微信 shidelei002，或发邮件至 d@mamamuse.co，备注「姓名 + 试听 + 舞蹈/运动经历」，老师会尽快回复为你安排。首次课程完全免费。Add us on WeChat (shidelei002) or email d@mamamuse.co with your name, "trial", and any dance or fitness background. Your first class is completely free.</p>
+          <p style="font-size: 14px; line-height: 2; color: #6E645C; margin: 14px 0 0">添加微信 shidelei002，或发邮件至 d@mamamuse.co，备注「姓名 + 试听 + 舞蹈/运动经历，老师会尽快回复为你安排。首次课程完全免费。Add us on WeChat (shidelei002) or email d@mamamuse.co with your name, "trial", and any dance or fitness background. Your first class is completely free.</p>
         </details>
         <details style="border-top: 1px solid #C9BBB2; border-bottom: 1px solid #C9BBB2; padding: 22px 4px">
           <summary style="cursor: pointer; font-size: 15px; font-weight: 600; list-style: none">怎么付款？ How do I pay?</summary>
@@ -268,7 +275,7 @@ window.__resources = {
     <div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px, 8vw, 96px) clamp(20px, 5vw, 48px); box-sizing: border-box">
       <p style="margin: 0 0 18px; font-size: 12px; letter-spacing: 0.32em; color: #A08D84; text-align: center">GETTING HERE</p>
       <h2 style="font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; font-size: clamp(30px, 4vw, 42px); font-weight: 500; margin: 0 0 12px; text-align: center">试课路线指引 · Find the Studio</h2>
-      <p style="text-align: center; font-size: 13px; color: #8A7C72; margin: 0 0 56px; letter-spacing: 0.06em">4000 Middlefield Road, Palo Alto, CA 94303 · Room L6 · 每周五 11:00 AM–12:00 PM</p>
+      <p style="text-align: center; font-size: 13px; color: #8A7C72; margin: 0 0 56px; letter-spacing: 0.06em">4000 Middlefield Road, Palo Alto, CA 94303 · Room L6 · 每周五中午</p>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(32px, 4vw, 56px); align-items: stretch">
         <div style="display: flex; flex-direction: column; gap: 14px">
           <div style="position: relative; width: 100%; flex: 1; min-height: clamp(320px, 48vw, 460px)">
@@ -317,6 +324,30 @@ window.__resources = {
     </div>
   </section>
 
+  <div id="mobile-bar" style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 70; align-items: center; gap: 12px; padding: 11px 16px calc(11px + env(safe-area-inset-bottom)); background: rgba(250, 247, 243, 0.97); backdrop-filter: blur(14px); border-top: 1px solid #E4D8CE; box-shadow: 0 -8px 28px rgba(42, 38, 36, 0.09)">
+    <div style="flex: 1; line-height: 1.35">
+      <div style="font-size: 13px; font-weight: 700">首次课程免费</div>
+      <div style="font-size: 11px; color: #8A7C72">每周五中午 · Cubberley L6</div>
+    </div>
+    <div onClick="{{ openQr }}" style="background: #2A2624; color: #F5EDE8; padding: 13px 22px; border-radius: 999px; font-size: 13px; letter-spacing: 0.08em; font-weight: 600; white-space: nowrap; cursor: pointer">加微信约课 →</div>
+  </div>
+
+  <sc-if value="{{ qrOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeQr }}" style="position: fixed; inset: 0; z-index: 200; background: rgba(28, 25, 24, 0.72); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box">
+      <div style="background: #FAF7F3; border-radius: 28px; padding: 28px 24px 24px; width: min(360px, 100%); box-sizing: border-box; text-align: center; box-shadow: 0 30px 80px rgba(20, 17, 16, 0.4)">
+        <div style="font-family: 'Cormorant Garamond', 'Noto Serif SC', serif; font-size: 26px; font-weight: 600">加微信，约免费试课</div>
+        <div style="font-size: 13px; color: #8A7C72; margin-top: 8px; line-height: 1.7">长按下面的二维码 → 识别图中二维码<br>或长按保存后用「扫一扫」相册识别</div>
+        <div style="width: min(240px, 68vw); height: min(240px, 68vw); margin: 20px auto 0; background: #FFFFFF; border-radius: 20px; padding: 12px; box-sizing: border-box">
+          <img src="./assets/photo-wechat-qr.webp" alt="WeChat QR" style="width: 100%; height: 100%; object-fit: contain; display: block">
+        </div>
+        <div onClick="{{ copyId }}" style="margin-top: 18px; background: #2A2624; color: #F5EDE8; border-radius: 999px; padding: 14px 20px; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; cursor: pointer">{{ copyLabel }}</div>
+        <div style="font-size: 12px; color: #8A7C72; margin-top: 12px; line-height: 1.7">复制后打开微信 → 通讯录 → 添加朋友<br>粘贴搜索，备注「姓名 + 试听」</div>
+        <a href="mailto:d@mamamuse.co?subject=%E9%A2%84%E7%BA%A6%E8%AF%95%E8%AF%BE" style="display: block; font-size: 13px; color: #6E645C; margin-top: 16px; border-bottom: 1px solid #C9BBB2; padding-bottom: 3px; width: fit-content; margin-left: auto; margin-right: auto">或发邮件 d@mamamuse.co</a>
+        <div style="font-size: 12px; letter-spacing: 0.14em; color: #A08D84; margin-top: 20px">点击任意处关闭</div>
+      </div>
+    </div>
+  </sc-if>
+
   <footer data-screen-label="Footer" style="border-top: 1px solid #E4D8CE">
     <div style="max-width: 1200px; margin: 0 auto; padding: 24px clamp(20px, 5vw, 48px); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #A08D84; letter-spacing: 0.08em; box-sizing: border-box">
       <span style="font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: 0.2em; color: #2A2624">MAMA MUSE</span>
@@ -331,7 +362,7 @@ window.__resources = {
   &quot;showAnnounce&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Content&quot;}
 }">
 class Component extends DCLogic {
-  state = { qrOpen: false };
+  state = { qrOpen: false, copied: false };
   componentDidMount() {
     this._onKey = e => { if (e.key === 'Escape' && this.state.qrOpen) this.setState({ qrOpen: false }); };
     document.addEventListener('keydown', this._onKey);
@@ -342,6 +373,16 @@ class Component extends DCLogic {
   renderVals() {
     const arches = this.props.arches ?? true;
     return {
+      qrOpen: this.state.qrOpen,
+      copyLabel: this.state.copied ? '已复制 ✓ shidelei002' : '复制微信号 shidelei002',
+      openQr: e => { if (e) e.preventDefault(); this.setState({ qrOpen: true, copied: false }); },
+      closeQr: () => this.setState({ qrOpen: false }),
+      copyId: e => {
+        if (e) e.stopPropagation();
+        const done = () => this.setState({ copied: true });
+        if (navigator.clipboard) navigator.clipboard.writeText('shidelei002').then(done, done);
+        else done();
+      },
 
       accent: this.props.accent ?? "#E8B4B8",
       showAnnounce: this.props.showAnnounce ?? true,
